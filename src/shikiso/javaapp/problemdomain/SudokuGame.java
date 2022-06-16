@@ -2,6 +2,8 @@ package shikiso.javaapp.problemdomain;
 
 import java.io.Serializable;
 
+import shikiso.javaapp.constants.GameState;
+
 public class SudokuGame implements Serializable{
 	private final GameState gameState;
 	private final int[][] gridState;
@@ -17,7 +19,7 @@ public class SudokuGame implements Serializable{
 		return gameState;
 	}
 	
-	public int[][] getGridState(){
+	public int[][] getCopyOfGridState(){
 		return SudokuUtitlities.copyToNewArray(gridState);
 	}
 }

@@ -1,5 +1,7 @@
 package shikiso.javaapp.userinterface;
 
+import shikiso.javaapp.problemdomain.SudokuGame;
+
 public class IUserInterfaceContract {
 	interface EventListener {
 		void onSudokuInput(int x, int y, int input);
