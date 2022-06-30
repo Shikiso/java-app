@@ -6,41 +6,13 @@ import java.util.Random;
 
 import shikiso.javaapp.problemdomain.Coordinates;
 
+import static shikiso.javaapp.problemdomain.SudokuGame.GRID_BOUNDARY;
+
 public class GameGenerator {
 	public static int[][] getNewGameGrid() { 
-		return unsolveGame());
+		return unsolveGame(getSolveGame());
 	}
 	
-	private static int[][] unsolveGame() {
-		Random random = new Random(System.currentTimeMillis());
-		
-		boolean solvable = false;
-		int[][] solvableArray = new int[GRID_BOUNDARY][GIRD_BOUNDARY];
-		
-		while (solvable == false) {
-			SudokuUtilities.copySudokuArrayValues(solvedGame, solvableArray);
-			
-			int index = 0;
-			
-			while (index < 40) {
-				int xCoordinate = random.nextInt(GRID_BOUNDARY);
-				int yCoordinate = random.nextInt(GRID_BOUNDARY);
-				
-				if (solvableArray[xCoordinate][yCoordinate] != 0) {
-					solvableArray[xCoordinate][yCoordinate] = 0;
-					index++;
-				}
-			}
-			
-			int[][] toBeSolved = new int[GRID_BOUNDARY][GRID_BOUNDARY];
-			SudokuUtilities.copySudokuArrayValues(solvableArray, toBeSolved);
-			
-			solvable = SudokuSolver.puzzleIsSolvable(toBeSolved);
-		}
-		
-		return solvableArray;
-	}
-
 	public static int[][] getSolveGame(){
 		Random random = new Random(System.currentTimeMillis());
 		int[][] newGrid = new int[GRID_BOUNDARY][GRID_BOUNDARY];
@@ -78,7 +50,7 @@ public class GameGenerator {
 				if (newGrid[xCoordinate][yCoordinate] == 0) {
 					newGrid[xCoordinate][yCoordinate] = value;
 					
-					if (GameLogic.sudokyIsInvalid(newGrid)) {
+					if (GameLogic.sudokuIsInvalid(newGrid)) {
 						newGrid[xCoordinate][yCoordinate] = 0;
 						interrupt++;
 					}else {
@@ -90,6 +62,37 @@ public class GameGenerator {
 		}
 		return newGrid;
 	}
+	
+	private static int[][] unsolveGame(int[][] solvedGame) {
+		Random random = new Random(System.currentTimeMillis());
+		
+		boolean solvable = false;
+		int[][] solvableArray = new int[GRID_BOUNDARY][GRID_BOUNDARY];
+		
+		while (solvable == false) {
+			SudokuUtilities.copySudokuArrayValues(solvedGame, solvableArray);
+			
+			int index = 0;
+			
+			while (index < 40) {
+				int xCoordinate = random.nextInt(GRID_BOUNDARY);
+				int yCoordinate = random.nextInt(GRID_BOUNDARY);
+				
+				if (solvableArray[xCoordinate][yCoordinate] != 0) {
+					solvableArray[xCoordinate][yCoordinate] = 0;
+					index++;
+				}
+			}
+			
+			int[][] toBeSolved = new int[GRID_BOUNDARY][GRID_BOUNDARY];
+			SudokuUtilities.copySudokuArrayValues(solvableArray, toBeSolved);
+			
+			solvable = SudokuSolver.puzzleIsSolvable(toBeSolved);
+		}
+		
+		return solvableArray;
+	}
+
 
 	private static void clearArray(int[][] newGrid) {
 		for (int xIndex = 0; xIndex < GRID_BOUNDARY; xIndex++) {

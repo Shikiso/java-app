@@ -2,6 +2,8 @@ package shikiso.javaapp.computationlogic;
 
 import shikiso.javaapp.problemdomain.Coordinates;
 
+import static shikiso.javaapp.problemdomain.SudokuGame.GRID_BOUNDARY;
+
 public class SudokuSolver {
 	
 	public static boolean puzzleIsSolvable(int[][] puzzle) {

@@ -2,7 +2,7 @@ package shikiso.javaapp.problemdomain;
 
 import java.io.IOException;
 
-public class IStorage {
+public interface  IStorage {
 	void updateGameData(SudokuGame game) throws IOException;
 	SudokuGame getGameData() throws IOException;
 	

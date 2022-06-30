@@ -5,6 +5,7 @@ import java.io.IOException;
 import shikiso.javaapp.constants.GameState;
 import shikiso.javaapp.constants.Messages;
 import shikiso.javaapp.problemdomain.IStorage;
+import shikiso.javaapp.computationlogic.GameLogic;
 import shikiso.javaapp.problemdomain.SudokuGame;
 import shikiso.javaapp.userinterface.IUserInterfaceContract;
 
@@ -45,7 +46,7 @@ public class ControlLogic implements IUserInterfaceContract.EventListener {
 	}
 	
 	@Override
-	public void onDiaglogClick() {
+	public void onDialogClick() {
 		try {
 			storage.updateGameData(
 				GameLogic.getNewGame()
