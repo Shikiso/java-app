@@ -2,12 +2,18 @@ package shikiso.javaapp;
 
 import java.io.IOException;
 
-public class SudokuApplication {
+import shikiso.javaapp.buildlogic.SudokuBuildLogic;
+import shikiso.javaapp.userinterface.IUserInterfaceContract;
+import shikiso.javaapp.userinterface.UserInterfaceImpl;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class SudokuApplication extends Application {
 	private IUserInterfaceContract.View uiImpl;
 	
 	@Override
-	public void start(Stage primaryStage) throws Exception{
-		uiImpl = new User InterfaceImpl(primaryStage);
+	public void start(Stage primaryStage) throws IOException {
+		uiImpl = new UserInterfaceImpl(primaryStage);
 		try {
 			SudokuBuildLogic.build(uiImpl);
 		} catch (IOException e) {
